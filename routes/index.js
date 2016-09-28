@@ -3,6 +3,7 @@ var router = express.Router();
 var weather = require('../public/javascripts/weather.js')
 var query = require('../database/query');
 
+
 //*********************
 // ******* GETS **********
 
@@ -29,22 +30,28 @@ router.get('/create-profile', function(req, res, next) {
 });
 
 router.get('/dashboard', function(req, res, next) {
-    res.render('dashboard', {
-        title: 'Scurry'
-    });
-});
+  query.upcomingEventsByUsers(req.user.id)
+  .then(function(data){
+  res.render('dashboard', {
+    title: 'Scurry',
+    events: data,
+  })
+})
+})
 
 router.get('/find-activity', function(req, res, next) {
-    query.getAllActivites()
-        .then(function(data) {
-            res.render('find-activity', {
-                title: 'Scurry',
-                activity: data
-            });
-          })
-        .catch(function(err) {
-            return next(err);
-        })
+        query.getAllActivites()
+         .then(function(data) {
+             res.render('find-activity', {
+                 title: 'Scurry',
+                 activity: data,
+                 user_id: req.user.id
+             });
+           })
+         .catch(function(err) {
+             return next(err);
+         })
+
 });
 
 
@@ -55,7 +62,6 @@ router.get('/create-activity', function(req, res, next) {
               title: 'Scurry',
               activity: data,
               user_id: req.user.id
-
           });
         })
       .catch(function(err) {
@@ -107,7 +113,7 @@ router.post('/create-activity', function(req, res, next){
 	.then(function(data) {
     res.redirect('/dashboard')
 	})
-	.catch(function(err) {
+	.catch(function(err){
 		return next(err);
 	})
 })
