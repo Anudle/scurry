@@ -1,12 +1,9 @@
 <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
 <div class='dasboardbox'>
 
-<<<<<<< HEAD
-  <h2 class='dashboard-h2'>Hello {{data.name}}!</h2>
-=======
+
   <h2 class='dashboard-h2'>Hello {{user}}!</h2>
   <br>
->>>>>>> 86517e2bba30aacc8ad062e2aa15042ebe365b28
 
     <div class="row">
 
@@ -27,6 +24,9 @@
                     <div class="card-block" id='upcoming'>
                         <h5>Upcoming</h5>
                         <p class="card-text">Your Activities: </p>
+                        {{#each events}}
+                        <p> {{this.title}} in {{this.city}}</p>
+                        {{/each}}
                         <p class="card-text">You're Attending: </p>
                         <span class='weather-results'>
                         </span>
@@ -53,10 +53,7 @@
 
                         <span id='weather-results'>
                         </span>
-<<<<<<< HEAD
 
-=======
->>>>>>> 86517e2bba30aacc8ad062e2aa15042ebe365b28
                     </div>
                 </div>
 

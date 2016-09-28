@@ -40,8 +40,12 @@ module.exports = {
         })
     },
 
-    getEventByUsers: function(user) {
-        return Events().where('users_id', user);
+    upcomingEventsByUsers: function(id) {
+        return Events().where('admin_id', id)
+    },
+
+    getEventsByUsers: function(id) {
+      return Events().where('admin_id', id)
     },
 
     getEventByLocation: function(location) {
@@ -54,5 +58,9 @@ module.exports = {
 
     deleteEvent: function(id) {
         return Events().where('id', id).del();
+    },
+
+    getActivityIDByName: function(name) {
+      return Events().select('id').where('event_name', name)
     }
 }
